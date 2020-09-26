@@ -1,0 +1,23 @@
+{
+  "name": "algorithm_course",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test:dev": "jest -o --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zhuoqi-chen/algorithm_course.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/zhuoqi-chen/algorithm_course/issues"
+  },
+  "homepage": "https://github.com/zhuoqi-chen/algorithm_course#readme",
+  "devDependencies": {
+    "jest": "^26.4.2",
+    "ts-jest": "^26.4.0"
+  }
+}
