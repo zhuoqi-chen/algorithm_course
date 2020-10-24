@@ -49,7 +49,7 @@ export class LoopQueue<T> implements IQueue<T> {
     }
     return rt as T;
   }
-  getFirst() {
+  public getFirst() {
     if (this.isEmpty()) {
       throw new Error("The queue is empty.");
     }
