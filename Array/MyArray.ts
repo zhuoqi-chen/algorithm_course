@@ -1,7 +1,7 @@
-class MyArray<T> {
+export class MyArray<T> {
   data!: T[];
   size: number = 0;
-  constructor(capacity: number = 10) {
+  constructor(public capacity: number = 10) {
     this.data = new Array(capacity);
   }
   public push(value: T) {
@@ -9,6 +9,33 @@ class MyArray<T> {
   }
   public shift(value: T) {
     this.add(0, value);
+  }
+  public unshift() {
+    return this.delete(0);
+  }
+  public get(index: number): T {
+    if (index < 0 || index >= this.size) {
+      throw new Error("invalid index");
+    }
+    return this.data[index];
+  }
+  public getLast(): T {
+    return this.get(this.size - 1);
+  }
+  public deleteLast(): T {
+    return this.delete(this.size - 1);
+  }
+  public getFirst(): T {
+    return this.get(0);
+  }
+  public getSize(): number {
+    return this.data.length;
+  }
+  public isEmpty(): boolean {
+    return this.size === 0;
+  }
+  public getCapacity(): number {
+    return this.capacity;
   }
   public add(index: number, value: T) {
     // if (this.size === this.data.length) {
@@ -50,9 +77,9 @@ class MyArray<T> {
   }
 }
 
-const myArray = new MyArray<number>();
-myArray.push(1);
-myArray.push(2);
-myArray.shift(0);
-console.log(myArray.delete(0));
-console.log(myArray);
+// const myArray = new MyArray<number>();
+// myArray.push(1);
+// myArray.push(2);
+// myArray.shift(0);
+// console.log(myArray.delete(0));
+// console.log(myArray);
