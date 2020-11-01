@@ -30,6 +30,27 @@ export class LinkedList<T> {
     this.size++;
   }
   /**
+   * delete
+   */
+  public delete(index: number): Node<T> | undefined {
+    this.checkIndex(index);
+    let pre: Node<T> | undefined = this.dummyHead;
+    for (let i = 0; i < index; i++) {
+      if (pre.next) {
+        pre = pre.next;
+      }
+    }
+    const rtNode = pre.next;
+    if (rtNode) {
+      pre.next = rtNode.next;
+    }
+    if (rtNode) {
+      rtNode.next = undefined;
+    }
+
+    return rtNode;
+  }
+  /**
    * set
    */
   public set(index: number, data: T): void {
@@ -111,3 +132,11 @@ linkedList4.addLast(3);
 linkedList4.addLast(4);
 linkedList4.set(1, 222);
 console.log(linkedList4.getStatus());
+console.log("test case 5");
+const linkedList5 = new LinkedList();
+linkedList5.addLast(1);
+linkedList5.addLast(2);
+linkedList5.addLast(3);
+console.log(linkedList5.getStatus());
+linkedList5.delete(1);
+console.log(linkedList5.getStatus());
