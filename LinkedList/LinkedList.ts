@@ -1,12 +1,12 @@
 class Node<T> {
-  constructor(public data?: T, public next?: Node<T>) {}
+  constructor(public data: T | null, public next: Node<T | null> | null) {}
 }
 
 export class LinkedList<T> {
-  private dummyHead!: Node<T>;
+  public dummyHead!: Node<T | null>;
   private size!: number;
   constructor() {
-    this.dummyHead = new Node();
+    this.dummyHead = new Node(null, null);
     this.size = 0;
   }
   /**
@@ -32,9 +32,9 @@ export class LinkedList<T> {
   /**
    * delete
    */
-  public delete(index: number): Node<T> | undefined {
+  public delete(index: number) {
     this.checkIndex(index);
-    let pre: Node<T> | undefined = this.dummyHead;
+    let pre = this.dummyHead;
     for (let i = 0; i < index; i++) {
       if (pre.next) {
         pre = pre.next;
@@ -45,10 +45,23 @@ export class LinkedList<T> {
       pre.next = rtNode.next;
     }
     if (rtNode) {
-      rtNode.next = undefined;
+      rtNode.next = null;
     }
 
     return rtNode;
+  }
+  /**
+   * removeElement
+   */
+  public removeElement<T>(
+    head: Node<T> | null,
+    value: T
+  ): Node<T | null> | null {
+    if (head === null) {
+      return null;
+    }
+    head.next = this.removeElement(head.next, value);
+    return head.data === value ? head.next : head;
   }
   /**
    * set

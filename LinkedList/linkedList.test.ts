@@ -2,12 +2,13 @@ import { LinkedList } from "./LinkedList";
 
 const linkedList = new LinkedList();
 
+console.log("test case 1");
 linkedList.addFirst(1);
 linkedList.addFirst(2);
 linkedList.addFirst(3);
 linkedList.addFirst(4);
 console.log(linkedList.getStatus());
-
+console.log("test case 2");
 const linkedList2 = new LinkedList();
 
 linkedList2.addLast(1);
@@ -15,7 +16,7 @@ linkedList2.addLast(2);
 linkedList2.addLast(3);
 linkedList2.addLast(4);
 console.log(linkedList2.getStatus());
-
+console.log("test case 3");
 const linkedList3 = new LinkedList();
 linkedList3.addFirst(1);
 linkedList3.addFirst(2);
@@ -23,7 +24,7 @@ linkedList3.addFirst(3);
 linkedList3.addFirst(4);
 linkedList3.add(2, 555);
 console.log(linkedList3.getStatus());
-
+console.log("test case 4");
 const linkedList4 = new LinkedList();
 linkedList4.addLast(1);
 linkedList4.addLast(2);
@@ -39,3 +40,12 @@ linkedList5.addLast(3);
 console.log(linkedList5.getStatus());
 linkedList5.delete(1);
 console.log(linkedList5.getStatus());
+
+console.log("test case 6");
+const linkedList6 = new LinkedList();
+linkedList6.addLast(1);
+linkedList6.addLast(2);
+linkedList6.addLast(3);
+console.log(linkedList6.getStatus());
+console.log(linkedList6.removeElement(linkedList6.dummyHead, 2));
+console.log(linkedList6.getStatus());
