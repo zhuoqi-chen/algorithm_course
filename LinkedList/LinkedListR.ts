@@ -78,6 +78,22 @@ export class LinkedListR<T> {
     this.setR(this.head, index, data);
   }
   /**
+   * reverse
+   */
+  public reverse() {
+    let pre = null;
+    let curr = this.head;
+    while (curr !== null) {
+      const next = curr?.next || null;
+      if (curr) {
+        curr.next = pre;
+      }
+      pre = curr;
+      curr = next;
+    }
+    this.head = pre;
+  }
+  /**
    * isEmpty
    */
   public isEmpty(): boolean {

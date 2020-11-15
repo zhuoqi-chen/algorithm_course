@@ -36,3 +36,12 @@ linkedListR4.set(0, 111);
 linkedListR4.set(1, 222);
 linkedListR4.set(2, 333);
 console.log(linkedListR4.getStatus());
+
+console.log("test reverse");
+const linkedListR5 = new LinkedListR();
+linkedListR5.addLast(1);
+linkedListR5.addLast(2);
+linkedListR5.addLast(3);
+console.log(linkedListR5.getStatus());
+linkedListR5.reverse();
+console.log(linkedListR5.getStatus());
