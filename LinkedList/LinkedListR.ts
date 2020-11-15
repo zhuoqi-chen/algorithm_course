@@ -94,6 +94,27 @@ export class LinkedListR<T> {
     this.head = pre;
   }
   /**
+   * reverseRecursion
+   */
+  public reverseRecursion() {
+    this.head = this.reverseR(this.head, 0);
+  }
+  // 返回已经反转后的最后一个 node
+  private reverseR(
+    head: Node<T | null> | null,
+    step: number
+  ): Node<T | null> | null {
+    console.log(`${step}=> head`, head);
+    if (head === null || head.next === null) {
+      return head;
+    } else {
+      const rt = this.reverseR(head.next, step + 1);
+      head.next.next = head;
+      head.next = null;
+      return rt;
+    }
+  }
+  /**
    * isEmpty
    */
   public isEmpty(): boolean {
