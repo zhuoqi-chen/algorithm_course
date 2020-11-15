@@ -19,6 +19,10 @@
   "homepage": "https://github.com/zhuoqi-chen/algorithm_course#readme",
   "devDependencies": {
     "jest": "^26.4.2",
-    "ts-jest": "^26.4.0"
+    "ts-jest": "^26.4.0",
+    "ts-node": "^9.0.0"
+  },
+  "dependencies": {
+    "typescript": "^4.0.5"
   }
 }
