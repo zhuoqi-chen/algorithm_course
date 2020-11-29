@@ -1,0 +1,44 @@
+export class QuickSortTwoWays {
+  static sort(arr: number[]) {
+    this.sortR(arr, 0, arr.length - 1);
+    return arr;
+  }
+  static sortR(arr: number[], l: number, r: number) {
+    if (l > r) {
+      return;
+    }
+    const p = this.partition(arr, l, r);
+    this.sortR(arr, l, p - 1);
+    this.sortR(arr, p + 1, r);
+  }
+  static getRandomNumber(maxNum: number, minNum: number) {
+    return Math.floor(Math.random() * (maxNum - minNum + 1) + minNum);
+  }
+  static partition(arr: number[], l: number, r: number) {
+    const randomNum = this.getRandomNumber(l, r);
+    this.swap(arr, l, randomNum);
+    let i = l + 1;
+    let j = r;
+    while (true) {
+      while (i <= j && arr[l] > arr[i]) {
+        i++;
+      }
+      while (i <= j && arr[j] > arr[l]) {
+        j--;
+      }
+      if (i >= j) {
+        break;
+      }
+      this.swap(arr, i, j);
+      i++;
+      j--;
+    }
+    this.swap(arr, l, j);
+    return j;
+  }
+  static swap(arr: number[], i: number, j: number) {
+    const temp = arr[i];
+    arr[i] = arr[j];
+    arr[j] = temp;
+  }
+}
