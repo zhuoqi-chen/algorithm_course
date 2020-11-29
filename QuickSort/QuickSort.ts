@@ -11,7 +11,12 @@ export class QuickSort {
     this.sortR(arr, l, p - 1);
     this.sortR(arr, p + 1, r);
   }
+  static getRandomNumber(maxNum: number, minNum: number) {
+    return Math.floor(Math.random() * (maxNum - minNum + 1) + minNum);
+  }
   static partition(arr: number[], l: number, r: number) {
+    const randomNum = this.getRandomNumber(l, r);
+    this.swap(arr, l, randomNum);
     let j = l;
     for (let i = l + 1; i <= r; i++) {
       if (arr[i] < arr[l]) {
