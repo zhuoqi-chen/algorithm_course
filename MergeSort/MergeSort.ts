@@ -9,7 +9,9 @@ export class MergeSort {
     const mid = Math.floor((l + r) / 2);
     this.sortR(arr, l, mid);
     this.sortR(arr, mid + 1, r);
-    this.merger(arr, l, mid, r);
+    if (arr[mid] > arr[mid + 1]) {
+      this.merger(arr, l, mid, r);
+    }
   }
   merger(arr: Array<number>, l: number, mid: number, r: number) {
     const copyArr = arr.slice(l, r + 1);
