@@ -1,20 +1,33 @@
 export class MergeSort {
+  sort(arr: Array<number>) {
+    this.sortR(arr, 0, arr.length - 1);
+  }
+  sortR(arr: Array<number>, l: number, r: number) {
+    if (l >= r) {
+      return;
+    }
+    const mid = Math.floor((l + r) / 2);
+    this.sortR(arr, l, mid);
+    this.sortR(arr, mid + 1, r);
+    this.merger(arr, l, mid, r);
+  }
   merger(arr: Array<number>, l: number, mid: number, r: number) {
-    const tmpArr = arr.slice(l, r);
+    const copyArr = arr.slice(l, r + 1);
     let i = l;
     let j = mid + 1;
-    for (let k = l; k < r; k++) {
+    for (let k = l; k <= r; k++) {
       if (i > mid) {
-        arr[k] = tmpArr[j - l];
+        arr[k] = copyArr[j - l];
         j++;
       } else if (j > r) {
-        arr[k] = tmpArr[i - l];
+        arr[k] = copyArr[i - l];
         i++;
-      } else if (tmpArr[i - l] < tmpArr[j - l]) {
-        arr[k] = tmpArr[i - l];
+      } else if (copyArr[i - l] <= copyArr[j - l]) {
+        arr[k] = copyArr[i - l];
         i++;
       } else {
-        arr[k] = tmpArr[j - l];
+        arr[k] = copyArr[j - l];
+        j++;
       }
     }
   }
