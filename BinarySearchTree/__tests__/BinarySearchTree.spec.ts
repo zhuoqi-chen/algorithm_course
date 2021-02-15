@@ -35,3 +35,25 @@ describe("test BinarySearchTree contains", () => {
   bst.addNode(2);
   expect(bst.contains(2)).toBeTruthy();
 });
+describe("test BinarySearchTree Order", () => {
+  const input = [5, 3, 6, 8, 4, 2];
+  const bst = new BinarySearchTree();
+  input.forEach((item) => bst.addNode(item));
+  /////////////////
+  //      5      //
+  //    /   \    //
+  //   3    6    //
+  //  / \    \   //
+  // 2  4     8  //
+  /////////////////
+
+  it("preOrder", () => {
+    expect(bst.preOrder()).toEqual([5, 3, 2, 4, 6, 8]);
+  });
+  it("preOrder", () => {
+    expect(bst.inOrder()).toEqual([2, 3, 4, 5, 6, 8]);
+  });
+  it("postOrder", () => {
+    expect(bst.postOrder()).toEqual([2, 4, 3, 8, 6, 5]);
+  });
+});

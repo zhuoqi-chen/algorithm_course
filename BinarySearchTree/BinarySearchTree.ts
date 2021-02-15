@@ -87,4 +87,52 @@ export class BinarySearchTree<T = number> {
       return true;
     }
   }
+  /**
+   * preOrder
+   */
+  public preOrder() {
+    return this.preOrderR(this.root);
+  }
+  private preOrderR(node: BSTNode<T> | undefined): T[] {
+    if (node === undefined) {
+      return [];
+    }
+    return [
+      node.data,
+      ...this.preOrderR(node.left),
+      ...this.preOrderR(node.right),
+    ];
+  }
+  /**
+   * preOrder
+   */
+  public inOrder() {
+    return this.inOrderR(this.root);
+  }
+  private inOrderR(node: BSTNode<T> | undefined): T[] {
+    if (node === undefined) {
+      return [];
+    }
+    return [
+      ...this.inOrderR(node.left),
+      node.data,
+      ...this.inOrderR(node.right),
+    ];
+  }
+  /**
+   * postOrder
+   */
+  public postOrder() {
+    return this.postOrderR(this.root);
+  }
+  private postOrderR(node: BSTNode<T> | undefined): T[] {
+    if (node === undefined) {
+      return [];
+    }
+    return [
+      ...this.postOrderR(node.left),
+      ...this.postOrderR(node.right),
+      node.data,
+    ];
+  }
 }
