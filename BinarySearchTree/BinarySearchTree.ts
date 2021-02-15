@@ -36,4 +36,34 @@ export class BinarySearchTree<T = number> {
     }
     return node;
   }
+  public addNodeNotR(data: T) {
+    const newNode = new BSTNode(data);
+    if (!this.root) {
+      this.size++;
+      this.root = newNode;
+      return;
+    }
+    let p: BSTNode<T> | undefined = this.root;
+    while (p != undefined) {
+      if (data < p.data) {
+        if (p.left) {
+          p = p.left;
+        } else {
+          this.size++;
+          p.left = newNode;
+          return;
+        }
+      } else if (data > p.data) {
+        if (p.right) {
+          p = p.right;
+        } else {
+          this.size++;
+          p.right = newNode;
+          return;
+        }
+      } else {
+        return;
+      }
+    }
+  }
 }
