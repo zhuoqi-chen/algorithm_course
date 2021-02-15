@@ -66,4 +66,25 @@ export class BinarySearchTree<T = number> {
       }
     }
   }
+  /**
+   * contains
+   */
+  public contains(data: T) {
+    return this.containsR(this.root, data);
+  }
+  /**
+   * contains
+   */
+  private containsR(node: BSTNode<T> | undefined, data: T): boolean {
+    if (node === undefined) {
+      return false;
+    }
+    if (data > node.data) {
+      return this.containsR(node.right, data);
+    } else if (data < node.data) {
+      return this.containsR(node.left, data);
+    } else {
+      return true;
+    }
+  }
 }

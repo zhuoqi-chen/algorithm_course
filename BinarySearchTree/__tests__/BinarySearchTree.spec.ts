@@ -27,3 +27,11 @@ describe("test BinarySearchTree addNodeNotR", () => {
     expect(bst.getSize()).toBe(2);
   });
 });
+describe("test BinarySearchTree contains", () => {
+  const bst = new BinarySearchTree();
+  bst.addNode(1);
+  expect(bst.contains(1)).toBeTruthy();
+  expect(bst.contains(2)).toBeFalsy();
+  bst.addNode(2);
+  expect(bst.contains(2)).toBeTruthy();
+});
