@@ -1,7 +1,7 @@
 import { BSTNode } from "./BSTNode";
 
 export class BinarySearchTree<T = number> {
-  private root: BSTNode<T> | null = null;
+  private root?: BSTNode<T>;
   private size: number = 0;
   /**
    * getRoot
@@ -19,34 +19,21 @@ export class BinarySearchTree<T = number> {
    * addNode
    */
   public addNode(data: T) {
-    if (this.root === null) {
-      this.root = new BSTNode(data);
-      this.size++;
-      return;
-    }
-    this.addNodeR(this.root, data);
+    this.root = this.addNodeR(this.root, data);
   }
   /**
    * addNodeR
    */
-  private addNodeR(node: BSTNode<T>, data: T) {
-    if (node.data === data) {
-      return;
+  private addNodeR(node: BSTNode<T> | undefined, data: T): BSTNode<T> {
+    if (node === undefined) {
+      this.size++;
+      return new BSTNode(data);
     }
     if (data <= node.data) {
-      if (node.left) {
-        this.addNodeR(node.left, data);
-      } else {
-        node.left = new BSTNode(data);
-        this.size++;
-      }
+      node.left = this.addNodeR(node.left, data);
     } else {
-      if (node.right) {
-        this.addNodeR(node.right, data);
-      } else {
-        node.right = new BSTNode(data);
-        this.size++;
-      }
+      node.right = this.addNodeR(node.right, data);
     }
+    return node;
   }
 }
