@@ -135,4 +135,25 @@ export class BinarySearchTree<T = number> {
       node.data,
     ];
   }
+  /**
+   * leverOrder
+   */
+  public leverOrder() {
+    const queue: Array<BSTNode<T>> = [];
+    const rt = [];
+    if (this.root) {
+      queue.push(this.root);
+    }
+    while (queue.length) {
+      const current = queue.shift() as BSTNode<T>;
+      rt.push(current.data);
+      if (current?.left) {
+        queue.push(current.left);
+      }
+      if (current?.right) {
+        queue.push(current.right);
+      }
+    }
+    return rt;
+  }
 }

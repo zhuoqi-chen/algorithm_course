@@ -56,4 +56,7 @@ describe("test BinarySearchTree Order", () => {
   it("postOrder", () => {
     expect(bst.postOrder()).toEqual([2, 4, 3, 8, 6, 5]);
   });
+  it("leverOrder", () => {
+    expect(bst.leverOrder()).toEqual([5, 3, 6, 2, 4, 8]);
+  });
 });
