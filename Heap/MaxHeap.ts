@@ -1,5 +1,13 @@
 export class MaxHeap<T extends number> {
   private data: Array<T> = [];
+  constructor(arr?: T[]) {
+    if (arr?.length) {
+      this.data = arr;
+      for (let i = this.parent(this.size); i >= 0; i--) {
+        this.siftDown(i);
+      }
+    }
+  }
   public get size(): number {
     return this.data.length;
   }
@@ -58,7 +66,7 @@ export class MaxHeap<T extends number> {
     return rt;
   }
 
-  private siftDown(index: number) {
+  public siftDown(index: number) {
     while (this.leftChild(index) < this.size) {
       let maxValueIndex = this.leftChild(index);
       const rightChildIndex = this.rightChild(index);
@@ -74,5 +82,14 @@ export class MaxHeap<T extends number> {
       this.swap(index, maxValueIndex);
       index = maxValueIndex;
     }
+  }
+  /**
+   * replace
+   */
+  public replace(data: T) {
+    const rt = this.findMax();
+    this.data[0] = data;
+    this.siftDown(0);
+    return rt;
   }
 }

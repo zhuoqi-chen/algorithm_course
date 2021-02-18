@@ -41,4 +41,19 @@ describe("test MaxHeap", () => {
       expect(arr).toEqual([7, 6, 5, 4, 3, 2, 1]);
     });
   });
+  it("test replace function", () => {
+    const maxHeap = new MaxHeap();
+    const input = [1, 2, 4, 5, 6, 7];
+    input.forEach((item) => {
+      maxHeap.add(item);
+    });
+    expect(maxHeap.replace(3)).toEqual(7);
+    expect(maxHeap.getData()).toEqual([6, 5, 3, 1, 4, 2]);
+  });
+  it("test heapify function", () => {
+    const input = [1, 2, 4, 5, 6, 7];
+    const maxHeap = new MaxHeap(input);
+    expect(maxHeap.getData()).toEqual([7, 6, 4, 5, 2, 1]);
+    expect(maxHeap.extractMax()).toEqual(7);
+  });
 });
