@@ -65,15 +65,15 @@ describe("test BinarySearchTree minimum & maximum", () => {
     const input = [5];
     const bst = new BinarySearchTree();
     input.forEach((item) => bst.addNode(item));
-    expect(bst.minimum()).toBe(5);
-    expect(bst.maximum()).toBe(5);
+    expect(bst.minimum().data).toBe(5);
+    expect(bst.maximum().data).toBe(5);
   });
   it("only have right node", () => {
     const input = [5, 8];
     const bst = new BinarySearchTree();
     input.forEach((item) => bst.addNode(item));
-    expect(bst.minimum()).toBe(5);
-    expect(bst.maximum()).toBe(8);
+    expect(bst.minimum().data).toBe(5);
+    expect(bst.maximum().data).toBe(8);
   });
   it("complex tree", () => {
     const input = [5, 3, 6, 4, 7];
@@ -86,7 +86,83 @@ describe("test BinarySearchTree minimum & maximum", () => {
     //    \    \   //
     //    4     7  //
     /////////////////
-    expect(bst.minimum()).toBe(3);
-    expect(bst.maximum()).toBe(7);
+    expect(bst.minimum().data).toBe(3);
+    expect(bst.maximum().data).toBe(7);
+  });
+});
+describe("test BinarySearchTree removeMinimum", () => {
+  it("only root node", () => {
+    const input = [5];
+    const bst = new BinarySearchTree();
+    input.forEach((item) => bst.addNode(item));
+    expect(bst.removeMinimum().data).toBe(5);
+    expect(bst.getSize()).toBe(0);
+  });
+  it("only have right node", () => {
+    const input = [5, 8];
+    const bst = new BinarySearchTree();
+    input.forEach((item) => bst.addNode(item));
+    expect(bst.removeMinimum().data).toBe(5);
+    expect(bst.getSize()).toBe(1);
+    expect(bst.preOrder()).toEqual([8]);
+  });
+  it("complex tree", () => {
+    const input = [5, 3, 6, 4, 7];
+    const bst = new BinarySearchTree();
+    input.forEach((item) => bst.addNode(item));
+    /////////////////
+    //      5      //
+    //    /   \    //
+    //   3    6    //
+    //    \    \   //
+    //    4     7  //
+    /////////////////
+    expect(bst.removeMinimum().data).toBe(3);
+    /////////////////
+    //      5      //
+    //    /   \    //
+    //   4    6    //
+    //         \   //
+    //         7   //
+    /////////////////
+    expect(bst.preOrder()).toEqual([5, 4, 6, 7]);
+  });
+});
+describe("test BinarySearchTree removeMaximum", () => {
+  it("only root node", () => {
+    const input = [5];
+    const bst = new BinarySearchTree();
+    input.forEach((item) => bst.addNode(item));
+    expect(bst.removeMaximum().data).toBe(5);
+    expect(bst.getSize()).toBe(0);
+  });
+  it("only have right node", () => {
+    const input = [5, 8];
+    const bst = new BinarySearchTree();
+    input.forEach((item) => bst.addNode(item));
+    expect(bst.removeMaximum().data).toBe(8);
+    expect(bst.getSize()).toBe(1);
+    expect(bst.preOrder()).toEqual([5]);
+  });
+  it("complex tree", () => {
+    const input = [5, 3, 4, 8, 7];
+    const bst = new BinarySearchTree();
+    input.forEach((item) => bst.addNode(item));
+    /////////////////
+    //      5      //
+    //    /   \    //
+    //   3    8    //
+    //    \  /     //
+    //    4 7      //
+    /////////////////
+    expect(bst.removeMaximum().data).toBe(8);
+    /////////////////
+    //      5      //
+    //    /   \    //
+    //   3    7    //
+    //    \        //
+    //    4        //
+    /////////////////
+    expect(bst.preOrder()).toEqual([5, 3, 4, 7]);
   });
 });

@@ -159,11 +159,11 @@ export class BinarySearchTree<T = number> {
   /**
    * minimum
    */
-  public minimum(): T {
+  public minimum() {
     if (!this.root) {
       throw new Error("no root node");
     }
-    return this.minimumR(this.root).data;
+    return this.minimumR(this.root);
   }
   private minimumR(node: BSTNode<T>): BSTNode<T> {
     if (node.left) {
@@ -175,17 +175,67 @@ export class BinarySearchTree<T = number> {
   /**
    * maximum
    */
-  public maximum(): T {
+  public maximum() {
     if (!this.root) {
       throw new Error("no root node");
     }
-    return this.maximumR(this.root).data;
+    return this.maximumR(this.root);
   }
   private maximumR(node: BSTNode<T>): BSTNode<T> {
     if (node.right) {
       return this.maximumR(node.right);
     } else {
       return node;
+    }
+  }
+  /**
+   * removeMinimum
+   */
+  public removeMinimum() {
+    if (!this.root) {
+      throw new Error("no root node");
+    }
+    const rt = this.minimum();
+    this.root = this.removeMinimumR(this.root);
+    return rt;
+  }
+  /**
+   * removeMinimumR
+   */
+  public removeMinimumR(node: BSTNode<T>): BSTNode<T> | undefined {
+    if (node.left) {
+      node.left = this.removeMinimumR(node.left);
+      return node;
+    } else {
+      const rightNode = node.right;
+      node.right = undefined;
+      this.size--;
+      return rightNode;
+    }
+  }
+  /**
+   * removeMaximum
+   */
+  public removeMaximum() {
+    if (!this.root) {
+      throw new Error("no root node");
+    }
+    const rt = this.maximum();
+    this.root = this.removeMaximumR(this.root);
+    return rt;
+  }
+  /**
+   * removeMaximumR
+   */
+  public removeMaximumR(node: BSTNode<T>): BSTNode<T> | undefined {
+    if (node.right) {
+      node.right = this.removeMaximumR(node.right);
+      return node;
+    } else {
+      const leftNode = node.left;
+      node.left = undefined;
+      this.size--;
+      return leftNode;
     }
   }
 }
