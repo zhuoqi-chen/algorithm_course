@@ -1,4 +1,4 @@
-import { MaxHeap } from "./MaxHeap";
+import { MaxHeap } from "../MaxHeap";
 
 describe("test MaxHeap", () => {
   it("test siftUp function", () => {
