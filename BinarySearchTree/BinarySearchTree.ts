@@ -238,4 +238,85 @@ export class BinarySearchTree<T = number> {
       return leftNode;
     }
   }
+  /**
+   * findNode
+   */
+  public findNode(data: T) {
+    if (!this.root) {
+      throw new Error("no root node");
+    }
+    return this.findNodeR(this.root, data);
+  }
+  /**
+   * findNodeR
+   */
+  public findNodeR(node: BSTNode<T>, data: T): BSTNode<T> | undefined {
+    if (node.data === data) {
+      return node;
+    } else if (data > node.data) {
+      if (node.right) {
+        return this.findNodeR(node.right, data);
+      } else {
+        return undefined;
+      }
+    } else {
+      if (node.left) {
+        return this.findNodeR(node.left, data);
+      } else {
+        return undefined;
+      }
+    }
+  }
+  /**
+   * removeNode
+   */
+  public removeNode(data: T) {
+    if (!this.root) {
+      throw new Error("no root node");
+    }
+    const node = this.findNode(data);
+    if (!node) {
+      throw new Error("node not find");
+    }
+    this.root = this.removeNodeR(this.root, data);
+    return node;
+  }
+  /**
+   * removeNode
+   */
+  public removeNodeR(
+    node: BSTNode<T> | undefined,
+    data: T
+  ): BSTNode<T> | undefined {
+    if (node === undefined) {
+      return undefined;
+    }
+    if (data > node.data) {
+      node.right = this.removeNodeR(node.right, data);
+      return node;
+    } else if (data < node.data) {
+      node.left = this.removeNodeR(node.left, data);
+      return node;
+    } else {
+      if (!node.right) {
+        const left = node.left;
+        node.left = undefined;
+        this.size--;
+        return left;
+      }
+      if (!node.left) {
+        const right = node.right;
+        node.right = undefined;
+        this.size--;
+        return right;
+      }
+      const miniNode = this.minimumR(node.right);
+      const right = this.removeMinimumR(node.right);
+      miniNode.right = right;
+      miniNode.left = node.left;
+      node.right = undefined;
+      node.left = undefined;
+      return miniNode;
+    }
+  }
 }

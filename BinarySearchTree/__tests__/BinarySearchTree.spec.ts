@@ -166,3 +166,79 @@ describe("test BinarySearchTree removeMaximum", () => {
     expect(bst.preOrder()).toEqual([5, 3, 4, 7]);
   });
 });
+describe("test BinarySearchTree findNode", () => {
+  it("only root node", () => {
+    const input = [5];
+    const bst = new BinarySearchTree();
+    input.forEach((item) => bst.addNode(item));
+    expect(bst.findNode(5)?.data).toBe(5);
+    expect(bst.findNode(6)?.data).toBe(undefined);
+  });
+  it("complex tree", () => {
+    const input = [5, 3, 4, 8, 7];
+    const bst = new BinarySearchTree();
+    input.forEach((item) => bst.addNode(item));
+    /////////////////
+    //      5      //
+    //    /   \    //
+    //   3    8    //
+    //    \  /     //
+    //    4 7      //
+    /////////////////
+    expect(bst.findNode(3)?.data).toBe(3);
+    expect(bst.findNode(30)?.data).toBe(undefined);
+  });
+});
+describe("test BinarySearchTree removeNode", () => {
+  it("remove root node", () => {
+    const input = [5, 3];
+    const bst = new BinarySearchTree();
+    input.forEach((item) => bst.addNode(item));
+    expect(bst.removeNode(5).data).toBe(5);
+    expect(bst.getSize()).toBe(input.length - 1);
+  });
+  it("remove leaf node", () => {
+    const input = [5, 3, 4, 8, 7];
+    const bst = new BinarySearchTree();
+    input.forEach((item) => bst.addNode(item));
+    /////////////////
+    //      5      //
+    //    /   \    //
+    //   3    8    //
+    //    \  /     //
+    //    4 7      //
+    /////////////////
+    expect(bst.removeNode(4).data).toBe(4);
+    /////////////////
+    //      5      //
+    //    /   \    //
+    //   3    8    //
+    //       /     //
+    //      7      //
+    /////////////////
+    expect(bst.preOrder()).toEqual([5, 3, 8, 7]);
+    expect(bst.getSize()).toBe(input.length - 1);
+  });
+  it("remove not leaf node", () => {
+    const input = [5, 3, 4, 8, 7, 9];
+    const bst = new BinarySearchTree();
+    input.forEach((item) => bst.addNode(item));
+    /////////////////
+    //      5      //
+    //    /   \    //
+    //   3    8    //
+    //    \  / \    //
+    //    4 7   9   //
+    /////////////////
+    expect(bst.removeNode(8).data).toBe(8);
+    /////////////////
+    //      5      //
+    //    /   \    //
+    //   3    9    //
+    //    \  /     //
+    //    4 7      //
+    /////////////////
+    expect(bst.preOrder()).toEqual([5, 3, 4, 9, 7]);
+    expect(bst.getSize()).toBe(input.length - 1);
+  });
+});
