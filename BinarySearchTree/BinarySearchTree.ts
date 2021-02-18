@@ -156,4 +156,36 @@ export class BinarySearchTree<T = number> {
     }
     return rt;
   }
+  /**
+   * minimum
+   */
+  public minimum(): T {
+    if (!this.root) {
+      throw new Error("no root node");
+    }
+    return this.minimumR(this.root).data;
+  }
+  private minimumR(node: BSTNode<T>): BSTNode<T> {
+    if (node.left) {
+      return this.minimumR(node.left);
+    } else {
+      return node;
+    }
+  }
+  /**
+   * maximum
+   */
+  public maximum(): T {
+    if (!this.root) {
+      throw new Error("no root node");
+    }
+    return this.maximumR(this.root).data;
+  }
+  private maximumR(node: BSTNode<T>): BSTNode<T> {
+    if (node.right) {
+      return this.maximumR(node.right);
+    } else {
+      return node;
+    }
+  }
 }

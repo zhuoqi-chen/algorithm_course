@@ -60,3 +60,33 @@ describe("test BinarySearchTree Order", () => {
     expect(bst.leverOrder()).toEqual([5, 3, 6, 2, 4, 8]);
   });
 });
+describe("test BinarySearchTree minimum & maximum", () => {
+  it("only root node", () => {
+    const input = [5];
+    const bst = new BinarySearchTree();
+    input.forEach((item) => bst.addNode(item));
+    expect(bst.minimum()).toBe(5);
+    expect(bst.maximum()).toBe(5);
+  });
+  it("only have right node", () => {
+    const input = [5, 8];
+    const bst = new BinarySearchTree();
+    input.forEach((item) => bst.addNode(item));
+    expect(bst.minimum()).toBe(5);
+    expect(bst.maximum()).toBe(8);
+  });
+  it("complex tree", () => {
+    const input = [5, 3, 6, 4, 7];
+    const bst = new BinarySearchTree();
+    input.forEach((item) => bst.addNode(item));
+    /////////////////
+    //      5      //
+    //    /   \    //
+    //   3    6    //
+    //    \    \   //
+    //    4     7  //
+    /////////////////
+    expect(bst.minimum()).toBe(3);
+    expect(bst.maximum()).toBe(7);
+  });
+});
