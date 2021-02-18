@@ -1,10 +1,13 @@
-export class MAxHeap<T extends number> {
-  data: Array<T> = [];
+export class MaxHeap<T extends number> {
+  private data: Array<T> = [];
   public get size(): number {
     return this.data.length;
   }
   public get isEmpty(): number {
     return this.data.length;
+  }
+  public getData() {
+    return this.data;
   }
   public add(item: T) {
     this.data.push(item);
@@ -32,6 +35,44 @@ export class MAxHeap<T extends number> {
       const parentIndex = this.parent(index);
       this.swap(index, parentIndex);
       index = parentIndex;
+    }
+  }
+  /**
+   * findMax
+   */
+  public findMax() {
+    if (this.size === 0) {
+      throw new Error("heap is empty");
+    }
+    return this.data[0];
+  }
+
+  /**
+   * extractMax
+   */
+  public extractMax() {
+    const rt = this.findMax();
+    this.swap(0, this.size - 1);
+    this.data.pop();
+    this.siftDown(0);
+    return rt;
+  }
+
+  private siftDown(index: number) {
+    while (this.leftChild(index) < this.size) {
+      let maxValueIndex = this.leftChild(index);
+      const rightChildIndex = this.rightChild(index);
+      if (
+        rightChildIndex < this.size &&
+        this.data[rightChildIndex] > this.data[maxValueIndex]
+      ) {
+        maxValueIndex = rightChildIndex;
+      }
+      if (this.data[index] > this.data[maxValueIndex]) {
+        break;
+      }
+      this.swap(index, maxValueIndex);
+      index = maxValueIndex;
     }
   }
 }
