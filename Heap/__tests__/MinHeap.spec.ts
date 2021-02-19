@@ -29,7 +29,7 @@ describe("test minHeap", () => {
       );
       expect(minHeap.getData()).toEqual(minHeapContrast.toArray());
       const t = () => {
-        minHeap.extractMin();
+        minHeap.pop();
       };
       expect(t).toThrow("heap is empty");
     });
@@ -38,7 +38,7 @@ describe("test minHeap", () => {
         getRadomNumberArray,
         generateCompileHeap
       )();
-      expect(minHeap.extractMin()).toBe(minHeapContrast.pop());
+      expect(minHeap.pop()).toBe(minHeapContrast.pop());
       expect(minHeap.getData()).toEqual(minHeapContrast.toArray());
     });
     it("test extractMin return value sort", () => {
@@ -48,7 +48,7 @@ describe("test minHeap", () => {
       const arr: number[] = [];
       const arr2: number[] = [];
       for (let i = 0; i < count; i++) {
-        arr.push(minHeap.extractMin());
+        arr.push(minHeap.pop());
         arr2.push(minHeapContrast.pop());
       }
       expect(arr).toEqual(arr2);

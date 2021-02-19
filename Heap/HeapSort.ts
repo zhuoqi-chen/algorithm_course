@@ -6,7 +6,7 @@ export class HeapSort {
 
     arr.forEach((item) => maxHeap.add(item));
     for (let i = arr.length - 1; i >= 0; i--) {
-      arr[i] = maxHeap.extractMax();
+      arr[i] = maxHeap.pop();
     }
     return arr;
   }

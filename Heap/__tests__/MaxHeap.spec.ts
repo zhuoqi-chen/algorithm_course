@@ -28,7 +28,7 @@ describe("test MaxHeap", () => {
     it("empty heap", () => {
       const maxHeap = new MaxHeap();
       const t = () => {
-        maxHeap.extractMax();
+        maxHeap.pop();
       };
       expect(t).toThrow("heap is empty");
     });
@@ -37,7 +37,7 @@ describe("test MaxHeap", () => {
         getRadomNumberArray,
         generateCompileHeap
       )();
-      expect(maxHeap.extractMax()).toBe(maxHeapContrast.pop());
+      expect(maxHeap.pop()).toBe(maxHeapContrast.pop());
       expect(maxHeap.size).toBe(maxHeapContrast.size());
       expect(maxHeap.getData()).toEqual(maxHeapContrast.toArray());
     });
@@ -50,7 +50,7 @@ describe("test MaxHeap", () => {
       const arr: number[] = [];
       const arr2: number[] = [];
       for (let i = 0; i < count; i++) {
-        arr.push(maxHeap.extractMax());
+        arr.push(maxHeap.pop());
         arr2.push(maxHeapContrast.pop());
       }
       expect(arr).toEqual(arr);
@@ -68,6 +68,6 @@ describe("test MaxHeap", () => {
     const input = [1, 2, 4, 5, 6, 7];
     const maxHeap = new MaxHeap(input);
     expect(maxHeap.getData()).toEqual([7, 6, 4, 5, 2, 1]);
-    expect(maxHeap.extractMax()).toEqual(7);
+    expect(maxHeap.pop()).toEqual(7);
   });
 });

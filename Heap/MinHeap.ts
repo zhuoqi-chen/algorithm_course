@@ -48,7 +48,7 @@ export class MinHeap<T extends number> {
   /**
    * findMin
    */
-  public findMin() {
+  public peek() {
     if (this.size === 0) {
       throw new Error("heap is empty");
     }
@@ -58,8 +58,8 @@ export class MinHeap<T extends number> {
   /**
    * extractMin
    */
-  public extractMin() {
-    const rt = this.findMin();
+  public pop() {
+    const rt = this.peek();
     this.swap(0, this.size - 1);
     this.data.pop();
     this.siftDown(0);
@@ -87,7 +87,7 @@ export class MinHeap<T extends number> {
    * replace
    */
   public replace(data: T) {
-    const rt = this.findMin();
+    const rt = this.peek();
     this.data[0] = data;
     this.siftDown(0);
     return rt;
