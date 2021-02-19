@@ -1,13 +1,28 @@
+import heap from "heap";
+import { flow } from "lodash";
 import { MaxHeap } from "../MaxHeap";
+import { getRadomNumberArray } from "../utils";
 
+function generateCompileHeap(input: number[]) {
+  const maxHeap = new MaxHeap();
+  const maxHeapContrast = new heap<number>((a, b) => b - a);
+  input.forEach((item) => {
+    maxHeap.add(item);
+    maxHeapContrast.insert(item);
+  });
+  return {
+    maxHeap,
+    maxHeapContrast,
+  };
+}
 describe("test MaxHeap", () => {
   it("test siftUp function", () => {
-    const maxHeap = new MaxHeap();
     const input = [1, 2, 3, 4, 5, 6, 7];
-    input.forEach((item) => {
-      maxHeap.add(item);
-    });
-    expect(maxHeap.getData()).toEqual([7, 4, 6, 1, 3, 2, 5]);
+    const { maxHeap, maxHeapContrast } = flow(
+      getRadomNumberArray,
+      generateCompileHeap
+    )();
+    expect(maxHeap.getData()).toEqual(maxHeapContrast.toArray());
   });
   describe("test siftDown function", () => {
     it("empty heap", () => {
@@ -18,37 +33,36 @@ describe("test MaxHeap", () => {
       expect(t).toThrow("heap is empty");
     });
     it("test extractMax return value ", () => {
-      const maxHeap = new MaxHeap();
-      const input = [1, 2, 3, 4, 5, 6, 7];
-      input.forEach((item) => {
-        maxHeap.add(item);
-      });
-      expect(maxHeap.extractMax()).toBe(7);
-      expect(maxHeap.size).toBe(6);
-      expect(maxHeap.getData()).toEqual([6, 4, 5, 1, 3, 2]);
+      const { maxHeap, maxHeapContrast } = flow(
+        getRadomNumberArray,
+        generateCompileHeap
+      )();
+      expect(maxHeap.extractMax()).toBe(maxHeapContrast.pop());
+      expect(maxHeap.size).toBe(maxHeapContrast.size());
+      expect(maxHeap.getData()).toEqual(maxHeapContrast.toArray());
     });
     it("test extractMax return value sort", () => {
-      const maxHeap = new MaxHeap();
-      const input = [1, 2, 3, 4, 5, 6, 7];
-      input.forEach((item) => {
-        maxHeap.add(item);
-      });
-      const count = input.length;
+      const { maxHeap, maxHeapContrast } = flow(
+        getRadomNumberArray,
+        generateCompileHeap
+      )();
+      const count = maxHeapContrast.size();
       const arr: number[] = [];
+      const arr2: number[] = [];
       for (let i = 0; i < count; i++) {
         arr.push(maxHeap.extractMax());
+        arr2.push(maxHeapContrast.pop());
       }
-      expect(arr).toEqual([7, 6, 5, 4, 3, 2, 1]);
+      expect(arr).toEqual(arr);
     });
   });
   it("test replace function", () => {
-    const maxHeap = new MaxHeap();
-    const input = [1, 2, 4, 5, 6, 7];
-    input.forEach((item) => {
-      maxHeap.add(item);
-    });
-    expect(maxHeap.replace(3)).toEqual(7);
-    expect(maxHeap.getData()).toEqual([6, 5, 3, 1, 4, 2]);
+    const { maxHeap, maxHeapContrast } = flow(
+      getRadomNumberArray,
+      generateCompileHeap
+    )();
+    expect(maxHeap.replace(3)).toEqual(maxHeapContrast.replace(3));
+    expect(maxHeap.getData()).toEqual(maxHeapContrast.toArray());
   });
   it("test heapify function", () => {
     const input = [1, 2, 4, 5, 6, 7];
