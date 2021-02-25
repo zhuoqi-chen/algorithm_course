@@ -1,7 +1,7 @@
+import { generateNumberArr } from "../../Utils/util";
 import { QuickSort } from "../QuickSort";
 import { QuickSortThreeWays } from "../QuickSortThreeWays";
 import { QuickSortTwoWays } from "../QuickSortTwoWays";
-import { generateNumberArr } from "../util";
 describe("test QuickSort", () => {
   it("QuickSort single way", () => {
     const input = generateNumberArr(30);
