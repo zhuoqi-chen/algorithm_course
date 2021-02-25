@@ -18,15 +18,14 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
-      - name: Cache Node.js modules
+      - name: Get Yarn cache directory
+        id: yarn-cache-dir-path
+        run: echo "::set-output name=dir::$(yarn cache dir)"
+      - name: Use Yarn cache
         uses: actions/cache@v2
+        id: yarn-cache
         with:
-          # yarn cache files are stored in `~/.yarn` on Linux/macOS
-          path: ~/.yarn
-          key: ${{ runner.OS }}-node-${{ hashFiles('**/yarn.lock') }}
-          restore-keys: |
-            ${{ runner.OS }}-node-
-            ${{ runner.OS }}-
-      - uses: actions/cache@v1
-      - run: yarn --frozen-lockfile
+          path: ${{ steps.yarn-cache-dir-path.outputs.dir }}
+          key: ${{ runner.os }}-yarn-${{ matrix.node-version }}-${{ hashFiles('**/yarn.lock') }}
+      - run: yarn --prefer-offline --frozen-lockfile
       - run: yarn run test
